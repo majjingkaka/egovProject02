@@ -351,7 +351,8 @@ public class EgovLoginController {
 		request.getSession().setAttribute("accessUser", null);
 
 		//return "redirect:/egovDevIndex.jsp";
-		return "redirect:/EgovContent.do";
+		//return "redirect:/EgovContent.do";
+		return "redirect:/admin/index.do";
 	}
 
 	/**

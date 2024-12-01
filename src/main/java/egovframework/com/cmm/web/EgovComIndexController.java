@@ -70,7 +70,8 @@ public class EgovComIndexController {
 	
 	@RequestMapping("/admin/index.do")
 	public String adminIndex(ModelMap model) {
-		return "egovframework/com/cmm/EgovUnitMain";
+		//return "egovframework/com/cmm/EgovUnitMain";
+		return "forward:/uat/uia/egovLoginUsr.do";
 	}
 	
 	@RequestMapping("/EgovTop.do")

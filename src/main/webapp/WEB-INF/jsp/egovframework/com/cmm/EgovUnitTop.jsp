@@ -167,8 +167,9 @@
 	
 	function logout() {
 		$("#sessionInfo").hide();
-
 		parent.frames["_content"].location.href = logoutUrl;
+		//document.getElementById('logoutForm').submit();
+		
 	}
 	
 </script>
@@ -191,5 +192,13 @@
 	    </div>
 	</div>
 </div>
+
+<form name="logoutForm" id="logoutForm" action="<c:url value='/uat/uia/actionLogout.do'/>" method="POST">
+<!-- ${pageContext.request.contextPath}/egov_security_logout -->
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
+
+
+
 </body>
 </html>
