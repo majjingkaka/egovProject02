@@ -63,14 +63,14 @@ public class EgovComIndexController {
 	@Resource(name = "loginService")
 	private EgovLoginService loginService;
 
-	@RequestMapping("/admin/index.do")
-	public String adminIndex(ModelMap model) {
+	@RequestMapping("/index.do")
+	public String index(ModelMap model) {
 		return "egovframework/com/cmm/EgovUnitMain";
 	}
 	
-	@RequestMapping("/index.do")
-	public String index(ModelMap model) {
-		return "portal/com/bible/main/bibleMain";
+	@RequestMapping("/admin/index.do")
+	public String adminIndex(ModelMap model) {
+		return "egovframework/com/cmm/EgovUnitMain";
 	}
 	
 	@RequestMapping("/EgovTop.do")

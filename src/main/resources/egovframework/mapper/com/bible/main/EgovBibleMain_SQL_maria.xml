@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Wed May 11 15:49:39 KST 2016-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BibleMainDAO">
+	
+	
+	
+	<select id="selectBibleBookAfList" resultType="egovMap">
+	/* BibleMainDAO.selectBibleBookAfList */
+		SELECT * 
+		FROM BIBLE_BOOK_AF
+		ORDER BY BOOK_SEQ
+	</select>
+	
+	<select id="selectBibleBookOrdrList" parameterType="bibleVo" resultType="egovMap">
+	/* BibleMainDAO.selectBibleBookOrdrList */
+		SELECT * 
+		FROM BIBLE_BOOK_ORDR 
+		WHERE 1=1
+		<if test="bookAf != null and bookAf != ''">
+			AND BOOK_AF = #{bookAf}
+		</if>
+		<if test="bookAf == null or bookAf == ''">
+			AND BOOK_AF = 'A'
+		</if>
+		ORDER BY BOOK_SEQ
+	</select>
+	
+	
+	<select id="selectBibleList2" parameterType="bibleVo" resultType="egovMap">
+	/* BibleMainDAO.selectBibleList2 */
+		SELECT * 
+		FROM BIBLE_BOOK_ORDR A LEFT OUTER JOIN BIBLE_KORHRV B ON A.BOOK_SEQ = B.BOOK 
+		WHERE 1=1
+		AND A.BOOK_AF = #{bookAf}
+		AND A.BOOK_SEQ = #{bookSeq}
+		<if test="btweenYn != null and btweenYn != ''">
+			<if test="btweenYn == 'Y'.toString()">
+				<if test="chapter != null and chapter != ''">
+					AND B.CHAPTER <![CDATA[>=]]> #{chapter}
+				</if>
+				<if test="chapter2 != null and chapter2 != ''">
+					AND B.CHAPTER <![CDATA[<=]]> #{chapter2}
+				</if>
+				<if test="verse != null and verse != ''">
+					AND B.VERSE <![CDATA[>=]]> #{verse}
+				</if>
+				<if test="verse2 != null and verse2 != ''">
+					AND B.VERSE <![CDATA[<=]]> #{verse2}
+				</if>
+			</if>
+			<if test="btweenYn == 'N'.toString()">
+				<if test="chapter != null and chapter != ''">
+					AND B.CHAPTER = #{chapter}
+				</if>
+				<if test="verse != null and verse != ''">
+					AND B.VERSE = #{verse}
+				</if>
+			</if>
+		</if>
+		
+		<if test="searchKeyword != null and searchKeyword != ''">
+		AND B.CONTENT LIKE CONCAT ('%', #{searchKeyword},'%')
+		</if>
+		ORDER BY B.CHAPTER, B.VERSE
+	</select>
+	
+	
+	
+	
+</mapper>

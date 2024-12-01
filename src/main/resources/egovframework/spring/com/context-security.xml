@@ -23,8 +23,17 @@
     <security:http pattern="/images/**" security="none"/>
  	<security:http pattern="/js/**" security="none"/>
  	<security:http pattern="/resource/**" security="none"/>
- 	<security:http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none"/>
-	<security:http pattern="\A/sym/mnu/mpm/.*\.do.*\Z" security="none"/>
+ 	<security:http pattern="/se2/**" security="none"/>
+ 	<security:http pattern="/se2823/**" security="none"/>
+ 	<security:http pattern="/se2upload/**" security="none"/>
+ 	<security:http pattern="/upload/**" security="none"/>
+ 	<security:http pattern="/imagePath/**" security="none" />
+ 	<security:http pattern="\A/WEB-INF/tiles/.*\Z" security="none" auto-config="true" use-expressions="true" />
+ 	<security:http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none" auto-config="true" use-expressions="true" />
+	<security:http pattern="/bible/**" auto-config="true" use-expressions="true" />
+ 	
+ 	
+	<!-- <security:http pattern="\A/sym/mnu/mpm/.*\.do.*\Z" security="none"/> -->
 
     <egov-security:config id="securityConfig"
 		loginUrl="/uat/uia/egovLoginUsr.do"

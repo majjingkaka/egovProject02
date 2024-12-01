@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Wed May 11 15:49:39 KST 2016-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bibleSayRecord">
+	
+	
+	
+	
+	<select id="bibleSayRecordListCnt" parameterType="sayRecordVo" resultType="java.lang.Integer">
+	/* bibleSayRecord.bibleSayRecordListCnt */
+		SELECT COUNT(*) 
+		FROM BIBLE_BOARD 
+		where 1=1
+		and use_at = 'Y'
+	</select>
+	
+	<select id="bibleSayRecordList" parameterType="sayRecordVo" resultType="egovMap">
+	/* bibleSayRecord.bibleSayRecordList */
+		SELECT * 
+		FROM BIBLE_BOARD
+		where 1=1
+		and use_at = 'Y'
+		ORDER BY REGIST_DT DESC, BB_SEQ DESC
+		LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+	
+	<select id="bibleSayRecordOne" parameterType="sayRecordVo" resultType="egovMap">
+	/* bibleSayRecord.bibleSayRecordOne */
+		SELECT * 
+		FROM BIBLE_BOARD 
+		WHERE 1=1
+		AND BB_SEQ = #{bbSeq}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<insert id="insertBibleSayRecord" parameterType="sayRecordVo">
+	/* bibleSayRecord.insertBibleSayRecord */
+		INSERT INTO bible_board(
+			bb_sj
+			,bb_cn
+			,use_at
+			,ntcr_id
+			,ntcr_nm
+			,regist_dt
+			,regist_id
+			,church
+			,church_gp
+			)
+		VALUES( 
+			#{bbSj}
+			, #{bbCn}
+			, #{useAt}
+			, #{ntcrId}
+			, #{ntcrNm}
+			, SYSDATE()
+			, #{registId}
+			, #{church}
+			, #{churchGp}
+			)
+	</insert>
+	
+	
+	<update id="updateBibleSayRecord" parameterType="sayRecordVo">
+	/* bibleSayRecord.updateBibleSayRecord */
+		UPDATE bible_board
+			SET bb_sj = #{bbSj},
+			bb_cn = #{bbCn},
+			updt_dt = SYSDATE(),
+			updt_id = #{updtId}
+			WHERE bb_seq = #{bbSeq}
+	</update>
+	
+	
+	<update id="deleteBibleSayRecord" parameterType="sayRecordVo">
+	/* bibleSayRecord.deleteBibleSayRecord */
+		UPDATE bible_board
+			SET use_at = 'N'
+			WHERE bb_seq = #{bbSeq}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
