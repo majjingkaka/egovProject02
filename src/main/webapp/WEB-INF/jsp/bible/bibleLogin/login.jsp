@@ -8,6 +8,9 @@
 	<div class="card-body">
             
 			<!-- <form id="formAuthentication" class="mb-3" action="index.html" method="POST"> -->
+			<%-- <form name="loginForm" id="loginForm" action="<c:url value='/uat/uia/actionLogin.do'/>" method="post"> --%>
+			
+			
 			<form name="loginForm" id="loginForm" action="<c:url value='/uat/uia/actionLogin.do'/>" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<input name="userSe" type="hidden" value="GNR"/>

@@ -108,9 +108,13 @@ public class EgovWebApplicationInitializer implements WebApplicationInitializer 
 			//-------------------------------------------------------------
 			FilterRegistration.Dynamic egovSpringSecurityLoginFilter = servletContext.addFilter("egovSpringSecurityLoginFilter", new EgovSpringSecurityLoginFilter());
 			//로그인 실패시 반활 될 URL설정
-			egovSpringSecurityLoginFilter.setInitParameter("loginURL", "/uat/uia/egovLoginUsr.do");
+			//egovSpringSecurityLoginFilter.setInitParameter("loginURL", "/uat/uia/egovLoginUsr.do");
+			egovSpringSecurityLoginFilter.setInitParameter("loginURL", "/bible/bibleLogin/login.do");
+			
 			//로그인 처리 URL설정
 			egovSpringSecurityLoginFilter.setInitParameter("loginProcessURL", "/uat/uia/actionLogin.do");
+			//egovSpringSecurityLoginFilter.setInitParameter("loginProcessURL", "/bible/bibleLogin/toLogin.do");
+			
 			//처리 Url Pattern
 			egovSpringSecurityLoginFilter.addMappingForUrlPatterns(null, false, "*.do");
 			

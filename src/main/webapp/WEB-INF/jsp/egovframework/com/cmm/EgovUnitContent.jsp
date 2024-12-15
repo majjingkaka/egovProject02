@@ -64,11 +64,36 @@
 		$dialog.dialog('open');
 </c:if>
     });
+    
+    function logout() {
+    	//alert('1');
+    	var form = document.logoutForm;
+		//$("#sessionInfo").hide();
+		//parent.frames["content"].location.href = logoutUrl;
+		//document.getElementById('logoutForm').submit();
+		//location.href = "/bible/main.do";
+		form.submit();
+		
+	}
 </script>
 </head>
+
+<form name="logoutForm" id="logoutForm" action="<c:url value='/bible/bibleLogin/logout.do' />" method="POST">
+<!-- ${pageContext.request.contextPath}/egov_security_logout -->
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+</form>
+
+
 <body>
 	<c:if test="${loginVO != null}">
-		${loginVO.name}(${loginVO.id})<spring:message code="comCmm.unitContent.2"/> <a href="${pageContext.request.contextPath }/uat/uia/actionLogout.do"><spring:message code="comCmm.unitContent.3"/></a>
+		${loginVO.name}(${loginVO.id})<spring:message code="comCmm.unitContent.2"/> 
+		
+		<%-- <a href="${pageContext.request.contextPath }/uat/uia/actionLogout.do"> --%>
+		<a href="javascript:logout();">
+			<spring:message code="comCmm.unitContent.3"/>
+		</a>
+		
+		
 		<!--
 		<br>passedDay = ${passedDay}
 		<br>expirePwdDay = ${expirePwdDay}

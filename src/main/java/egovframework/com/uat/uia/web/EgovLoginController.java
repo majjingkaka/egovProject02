@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -156,11 +157,11 @@ public class EgovLoginController {
 					}else if(sLoginIncorrectCode.equals("C")){
 						model.addAttribute("loginMessage", egovMessageSource.getMessage("fail.common.login",request.getLocale()));
 					}
-					return "redirect:/uat/uia/egovLoginUsr.do";
+					return "redirect:/bible/bibleLogin/login.do";
 				}
 		    }else{
 		    	model.addAttribute("loginMessage", egovMessageSource.getMessage("fail.common.login",request.getLocale()));
-		    	return "redirect:/uat/uia/egovLoginUsr.do";
+		    	return "redirect:/bible/bibleLogin/login.do";
 		    }
 		}
 		
@@ -182,7 +183,7 @@ public class EgovLoginController {
 
 		} else {
 			model.addAttribute("loginMessage", egovMessageSource.getMessage("fail.common.login",request.getLocale()));
-			return "redirect:/uat/uia/egovLoginUsr.do";
+			return "redirect:/bible/bibleLogin/login.do";
 		}
 	}
 
@@ -349,10 +350,19 @@ public class EgovLoginController {
 		// 세션모드인경우 Authority 초기화
 		// List<String> authList = (List<String>)EgovUserDetailsHelper.getAuthorities();
 		request.getSession().setAttribute("accessUser", null);
-
+		
+		if (request.getSession() != null) {
+			request.getSession().invalidate();
+		}
+		
+		SecurityContextHolder.clearContext();
+		
+		
 		//return "redirect:/egovDevIndex.jsp";
 		//return "redirect:/EgovContent.do";
-		return "redirect:/admin/index.do";
+		//return "redirect:/admin/index.do";
+		//return "redirect:/bible/main.do";
+		return "index";
 	}
 
 	/**

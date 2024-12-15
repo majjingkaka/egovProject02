@@ -166,10 +166,15 @@
 	}
 	
 	function logout() {
-		$("#sessionInfo").hide();
-		parent.frames["_content"].location.href = logoutUrl;
-		//document.getElementById('logoutForm').submit();
+		console.log('logout...');
+		var form = document.logoutForm;
 		
+		//$("#sessionInfo").hide();
+		//parent.frames["content"].location.href = logoutUrl;
+		//document.getElementById('logoutForm').submit();
+		form.submit();
+		
+		//location.href = "<c:url value='/bible/main.do'/>";
 	}
 	
 </script>
@@ -181,19 +186,24 @@
 			<a href="<c:url value='/EgovContent.do' />" target="_content"><img src="<c:url value='/images/egovframework/com/cmm/main/top_logo.png' />" alt="eGovframe"></a>
 		</h1>
 		<div style="margin-top:4px;">
-			<strong class="top_title_strong"><spring:message code="comCmm.top.title"/></strong>
+			
+			<strong class="top_title_strong"><spring:message code="comCmm.top.title"/>(123)</strong>
+		    
+		    
 		    <span id="sessionInfo">
 		    	<c:if test="${loginVO != null}">
 				<br><spring:message code="comCmm.top.leftSessionTime"/> - <span id="leftTimeInfo">00:00:00</span><!-- 세션만료 남은시간 -->
 			    <a id="clickInfo" class="btn02" href="#"  onclick="reqTimeAjax();return false;"><spring:message code="comCmm.top.incSessionTime"/></a><!-- 시간연장 -->
-			    <a class="btn02" href="#"  onclick="logout();return false;"><spring:message code="comCmm.unitContent.3"/></a><!-- 로그아웃 -->
+			    
+			    
+			    <a class="btn02" href="javascript:logout();" ><spring:message code="comCmm.unitContent.3"/></a><!-- 로그아웃 -->
 			    </c:if>
 		    </span>
 	    </div>
 	</div>
 </div>
 
-<form name="logoutForm" id="logoutForm" action="<c:url value='/uat/uia/actionLogout.do'/>" method="POST">
+<form name="logoutForm" id="logoutForm" action="<c:url value='/bible/bibleLogin/logout.do' />" >
 <!-- ${pageContext.request.contextPath}/egov_security_logout -->
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>

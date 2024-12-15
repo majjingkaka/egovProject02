@@ -19,6 +19,7 @@ import org.egovframe.rte.fdl.property.EgovPropertyService;
 import org.egovframe.rte.psl.dataaccess.util.EgovMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -48,12 +49,20 @@ public class BibleMainController {
 	@Resource(name="propertiesService")
     protected EgovPropertyService propertyService;
 	
+	//@Resource(name="passwordEncoder")
+	//private PasswordEncoder passwordEncoder;
+	
 	@RequestMapping("/bible/main.do")
 	public String main(HttpServletRequest request
 			, HttpServletResponse response
 			, ModelMap model
 			) {
 		log.debug("BibleMainController main call...");
+		
+		//log.debug("BibleMainController main call..."+passwordEncoder.encode("123"));
+		//System.out.println(">>"+passwordEncoder.encode("123"));
+		
+		
 		
 		return "bible/main/bibleMain";
 	}

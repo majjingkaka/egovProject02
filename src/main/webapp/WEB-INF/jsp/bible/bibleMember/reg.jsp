@@ -131,7 +131,7 @@ function f_changeMail(val){
          <input
            type="text" id="userId" name="userId"
            class="form-control"
-           placeholder="hong gir dong"
+           placeholder=""
            aria-describedby="defaultFormControlHelp"
          />
          <!-- <div id="defaultFormControlHelp" class="form-text">

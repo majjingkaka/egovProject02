@@ -62,7 +62,7 @@ public class AuthenticInterceptor implements HandlerInterceptor {
 		boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();	
 		//미민증사용자 체크
 		if(!isAuthenticated) {
-			ModelAndView modelAndView = new ModelAndView("redirect:/uat/uia/egovLoginUsr.do");
+			ModelAndView modelAndView = new ModelAndView("redirect:/bible/bibleLogin/login.do");
 			throw new ModelAndViewDefiningException(modelAndView);
 		}
 		//인증된 권한 목록
@@ -80,7 +80,7 @@ public class AuthenticInterceptor implements HandlerInterceptor {
 		}
 		//관리자 권한 체크
 		if(adminAuthUrlPatternMatcher && !authList.contains("ROLE_ADMIN")){
-			ModelAndView modelAndView = new ModelAndView("redirect:/uat/uia/egovLoginUsr.do?auth_error=1");
+			ModelAndView modelAndView = new ModelAndView("redirect:/bible/bibleLogin/login.do?auth_error=1");
 			throw new ModelAndViewDefiningException(modelAndView);
 		}
 		return true;

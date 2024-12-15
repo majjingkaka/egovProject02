@@ -30,15 +30,100 @@
  	<security:http pattern="/imagePath/**" security="none" />
  	<security:http pattern="\A/WEB-INF/tiles/.*\Z" security="none" auto-config="true" use-expressions="true" />
  	<security:http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none" auto-config="true" use-expressions="true" />
-	<security:http pattern="/bible/**" auto-config="true" use-expressions="true" />
+	
+	<security:http pattern="/bible/**" auto-config="true" use-expressions="true" /><!-- authentication-manager-ref="userJdbcUserManager" -->
+		<!-- <security:csrf disabled="true"/> -->
+		<!-- <security:intercept-url pattern="/bible/**" access="permitAll"/> -->
+	<!-- </security:http> -->
+	
+	<!-- 
+	<security:http pattern="/bible/**" auto-config="true" use-expressions="true">authentication-manager-ref="userJdbcUserManager"
+		<security:csrf disabled="true"/>
+		<security:intercept-url pattern="/bible/**" access="permitAll"/>
+		
+		<security:access-denied-handler ref="cnportalAccessDenied"/>
+        <security:form-login login-page="/bible/bibleLogin/login.do"
+                login-processing-url="/bible/bibleLogin/toLogin.do"
+                username-parameter="username"
+                password-parameter="password"
+                authentication-success-handler-ref="bibleSessionSavedRequestAwareAuthenticationHandler"
+                authentication-success-forward-url="/bible/main.do"
+                authentication-failure-handler-ref="bibleLoginHistoryAuthenticationFailureHandler"
+                authentication-failure-url="/bible/bibleLogin/login.do"
+                default-target-url="/bible/main.do"/>
+        <security:logout logout-url="/bible/bibleLogin/logout.do"
+        		success-handler-ref="cnportalLogoutSuccessHandler"
+                />
+                
+        <security:session-management session-fixation-protection="migrateSession">
+        	<security:concurrency-control max-sessions="1" expired-url="/bible/main.do"/> 중복 로그인 방지
+		</security:session-management>
+	</security:http>
  	
- 	
+ 	<bean id="cnportalAccessDenied" class="egovframework.com.bible.service.member.sec.BibleAccessDeniedHandler">
+    	<property name="defaultErrorPage" value="/errors/403" />
+    	<property name="siteId" value="bible" />
+    </bean>
+    <bean id="cnportalLogoutSuccessHandler" class="egovframework.com.bible.service.member.sec.BibleLogoutSuccessHandler">
+    	<property name="defaultTargetUrl" value="/bible/main.do" />
+    	<property name="siteId" value="bible" />
+    </bean>
+    <bean id="bibleSessionSavedRequestAwareAuthenticationHandler" class="egovframework.com.bible.service.member.sec.SessionSavedRequestAwareAuthenticationHandler">
+    	<property name="defaultTargetUrl" value="/bible/main.do" />
+    </bean>
+    
+    <bean id="bibleLoginHistoryAuthenticationFailureHandler" class="egovframework.com.bible.service.member.sec.LoginHistoryAuthenticationFailureHandler">
+    	<property name="defaultFailureUrl" value="/bible/bibleLogin/login.do" />
+    </bean>
+    
+ 	<security:authentication-manager id="userJdbcUserManager">
+        <security:authentication-provider user-service-ref="jdbcUserService">
+			<security:password-encoder ref="passwordEncoder" />
+		</security:authentication-provider>
+    </security:authentication-manager>
+    
+    <bean name="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+    
+    <bean id="jdbcUserService" class="egovframework.com.bible.service.member.sec.BibleJdbcUserDetailsManager" >
+        <property name="usersByUsernameQuery" value="
+			select user_id as username
+					, password as password
+					, user_nm
+					, user_emad
+					, user_cpno
+					, author_cd
+			from bible_user_info
+			where user_id = ?
+  		"/>
+        <property name="authoritiesByUsernameQuery" value="
+			select user_id, author_cd as authority
+			from bible_user_info
+			where user_id = ?
+        "/>
+        <property name="hierarchicalRolesQuery" value="
+       		select a.chldrn_author_cd as child, a.parnts_author_cd as parent
+			from bible_author_sclsrt a left join bible_author_sclsrt b on (a.chldrn_author_cd = b.parnts_author_cd)
+		"/>
+        <property name="mapper" ref="bibleUserMapping"/>
+        <property name="dataSource" ref="egov.dataSource"/>
+    </bean>
+    
+    
+    <bean id="bibleUserMapping" class="egovframework.com.bible.service.member.sec.BibleUserMapping" />
+     -->
+    
+    
+    
+    
+    
 	<!-- <security:http pattern="\A/sym/mnu/mpm/.*\.do.*\Z" security="none"/> -->
-
+	<!-- 패스워드 저장 방식 (sha-256, plaintext, sha, md5, bcrypt) -->
+	
+	
     <egov-security:config id="securityConfig"
-		loginUrl="/uat/uia/egovLoginUsr.do"
-		logoutSuccessUrl="/uat/uia/egovLoginUsr.do"
-		loginFailureUrl="/uat/uia/egovLoginUsr.do?login_error=1"
+		loginUrl="/bible/bibleLogin/login.do"
+		logoutSuccessUrl="/bible/bibleLogin/login.do"
+		loginFailureUrl="/bible/bibleLogin/login.do?login_error=1"
 		accessDeniedUrl="/sec/ram/accessDenied.do"
 
 		dataSource="egov.dataSource"
@@ -56,17 +141,17 @@
 		hashBase64="false"
 
 		concurrentMaxSessons="1"
-		concurrentExpiredUrl="/EgovContent.do"
+		concurrentExpiredUrl="/bible/main.do"
 		errorIfMaximumExceeded="false"
 
-		defaultTargetUrl="/EgovContent.do"
+		defaultTargetUrl="/bible/main.do"
 		alwaysUseDefaultTargetUrl="true"
 
 		sniff="true"
 		xframeOptions="SAMEORIGIN" 
 		xssProtection="true" 
 		cacheControl="false"
-		csrf="false"
+		csrf="true"
 		csrfAccessDeniedUrl="/egovCSRFAccessDenied.do"
 	/>
 

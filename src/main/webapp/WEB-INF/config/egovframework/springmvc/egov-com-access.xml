@@ -26,8 +26,8 @@
 	    globalAuthen="session"
 	    mappingPath="/**/*.do"
 	    dataSource="egov.dataSource"
-	    loginUrl="/uat/uia/egovLoginUsr.do"
-	    accessDeniedUrl="/uat/uia/egovLoginUsr.do?auth_error=1"
+	    loginUrl="/bible/bibleLogin/login.do"
+	    accessDeniedUrl="/bible/bibleLogin/login.do?auth_error=1"
 	    sqlAuthorityUser="SELECT CONCAT(B.USER_SE, B.USER_ID) USERID, A.AUTHOR_CODE AUTHORITY
 			FROM COMTNEMPLYRSCRTYESTBS A, COMVNUSERMASTER B
 			WHERE A.SCRTY_DTRMN_TRGET_ID = B.ESNTL_ID"

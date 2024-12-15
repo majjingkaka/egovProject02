@@ -193,7 +193,7 @@
 			 <%-- <sec:authorize access="!hasAnyRole('ROLE_USER','ROLE_SIMPLELOGIN')">
 			 </sec:authorize> --%>
 			
-			<sec:authorize access="!hasAnyRole('ROLE_USER','ROLE_SIMPLELOGIN')">
+			<sec:authorize access="!hasAnyRole('ROLE_ADMIN1','ROLE_ADMIN','ROLE_USER','ROLE_SIMPLELOGIN')">
 				<li class="menu-item <c:if test="${menuId eq 'bibleMember'}">active</c:if>">
 	              <a href="/bible/bibleMember/forInsert.do" class="menu-link">
 	                <i class="menu-icon tf-icons bx bx-brightness-half"></i>
@@ -209,7 +209,7 @@
 	            </li>
 			</sec:authorize>
 			
-			<sec:authorize access="hasAnyRole('ROLE_USER','ROLE_SIMPLELOGIN')">
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN1','ROLE_ADMIN','ROLE_USER','ROLE_SIMPLELOGIN')">
 				<li class="menu-item <c:if test="${menuId eq 'bibleLogout'}">active</c:if>">
 	              <a href="/bible/bibleLogin/logout.do" class="menu-link">
 	                <i class="menu-icon tf-icons bx bx-brightness-half"></i>
