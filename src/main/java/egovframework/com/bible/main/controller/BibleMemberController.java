@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import egovframework.com.bible.main.service.BibleMemberVO;
+import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.dao.CommonSqlDao;
+import egovframework.com.cmm.util.EgovUserDetailsHelper;
 
 @Controller
 public class BibleMemberController {
@@ -51,6 +53,16 @@ public class BibleMemberController {
 		log.debug("BibleMemberController insert call...");
 		
 		Map<String, Object> param = new HashMap<>();
+		
+		
+		//LoginVO user = (LoginVO)EgovUserDetailsHelper.getAuthenticatedUser();
+        //Boolean isAuthenticated = EgovUserDetailsHelper.isAuthenticated();
+		
+		
+		
+		
+		
+		
 		
 		
 		return "redirect:/bible/main.do";

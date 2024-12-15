@@ -13,7 +13,7 @@
 
 function bibleMemberInsert(){
 	
-	var frm = document.frm1;
+	var frm = document.frm;
 	
 	//var txt = oEditors.getById["bbCn"].getIR();
 	//oEditors.getById["bbCn"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -88,13 +88,13 @@ function addrSearch() {
 
 function f_changeMail(val){
 	
-	var frm1 = document.frm1;
+	var frm = document.frm;
 
-	if(frm1.emailMore.value != 'direct'){
+	if(frm.emailMore.value != 'direct'){
 		//frm.userEmad2.disabled = true;
-		frm1.emaildomain.value = val;
+		frm.emaildomain.value = val;
 	}else{
-		frm1.emaildomain.value = "";
+		frm.emaildomain.value = "";
 		//frm.userEmad2.disabled = false;
 	}
 }
@@ -114,7 +114,7 @@ function f_changeMail(val){
 
 
 
-<form id="frm1" name="frm1" method="post" action="/bible/bibleMember/insert.do">
+<form:form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/bible/bibleMember/insert.do">
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 
 
@@ -462,7 +462,7 @@ function f_changeMail(val){
  </div>
 </div>
 
-</form>
+</form:form>
 
 
 
