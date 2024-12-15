@@ -10,6 +10,9 @@ public enum KORCHO {
 	
 	//{"ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ"
 	//,"ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"};
+	//https://needjarvis.tistory.com/644
+	//https://inpa.tistory.com/entry/JAVA-%E2%98%95-%EC%97%B4%EA%B1%B0%ED%98%95Enum-%ED%83%80%EC%9E%85-%EB%AC%B8%EB%B2%95-%ED%99%9C%EC%9A%A9-%EC%A0%95%EB%A6%AC
+	
 	
 	KORCHO_0000("",0),
 	KORCHO_0001("ㄱ",2),
