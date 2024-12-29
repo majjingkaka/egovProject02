@@ -23,6 +23,12 @@ function bibleMemberInsert(){
         message : "아이디를 입력하세요"
     });
 	
+	if($('#idCheckYn').val() == 'N'){
+		alert("중복체크하세요");
+		$('#userId').focus();
+		return;
+	}
+	
 	v.add("password", {
 		required : true,
 		message : "비밀번호를 입력하세요"
@@ -124,6 +130,8 @@ function bibleMemberInsert(){
 	//oEditors.getById["content"].exec("SET_IR", [""]); //내용초기화
 	//oEditors.getById["content"].exec("PASTE_HTML", ["내용 내용"]); //내용밀어넣기
 	
+	
+	
 	if (confirm("저장 하시겠습니까?")) {
 		frm.action = "<c:url value='/bible/bibleMember/insert.do'/>";
 		frm.submit();
@@ -193,6 +201,43 @@ function f_changeMail(val){
 	}
 }
 
+function fn_id_check(){
+	
+	var userId = $("#userId").val();
+	if(userId == ''){
+		alert('아이디를 입력하세요');
+		$("#userId").focus();
+		return;
+	}
+	
+	
+	$.ajax({
+		type:"POST",
+		url:"<c:url value='/bible/bibleMember/bibleIdDplctCnfirmAjax.do' />",
+		data:{
+			"checkId": userId			
+		},
+		dataType:'json',
+		timeout:(1000*30),
+		success:function(returnData, status){
+			if(status == "success") {
+				
+				if(returnData.usedCnt > 0 ){
+					$('#idCheckYn').val('N');
+					//사용할수 없는 아이디입니다.
+					//$("#divModalResult").html("<font color='red'><spring:message code="comUssUmt.userManageRegistModal.result" /> : ["+returnData.checkId+"]<spring:message code="comUssUmt.userManageRegistModal.useMsg" /></font>");
+					alert('사용할수 없는 아이디입니다.');
+				}else{
+					$('#idCheckYn').val('Y');
+					//사용가능한 아이디입니다.
+					//$("#divModalResult").html("<font color='blue'><spring:message code="comUssUmt.userManageRegistModal.result" /> : ["+returnData.checkId+"]<spring:message code="comUssUmt.userManageRegistModal.notUseMsg" /></font>");
+					alert('사용가능한 아이디입니다.');
+				}
+			}else{ alert("ERROR!");return;} 
+		}
+		});
+}
+
 
 </script>
 
@@ -210,7 +255,7 @@ function f_changeMail(val){
 
 <form:form id="frm" name="frm" method="post" action="${pageContext.request.contextPath}/bible/bibleMember/insert.do">
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-
+<input type="hidden" name="idCheckYn" id="idCheckYn" value="N" />
 
 <div class="row">
   <div class="col-md-6">
@@ -220,7 +265,7 @@ function f_changeMail(val){
      	
        <div class="mb-3">
          <label for="userId" class="form-label" style="text-transform: none;">User ID</label>
-         <button type="button" class="btn btn-xs btn-primary" onclick="javascript:addrSearch();">check!</button>
+         <button type="button" class="btn btn-xs btn-primary" onclick="javascript:fn_id_check();">check!</button>
          
          <input
            type="text" id="userId" name="userId"

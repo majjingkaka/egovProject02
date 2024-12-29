@@ -16,12 +16,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import egovframework.com.bible.main.service.BibleMemberService;
 import egovframework.com.bible.main.service.BibleMemberVO;
 import egovframework.com.cmm.LoginVO;
 import egovframework.com.cmm.dao.CommonSqlDao;
 import egovframework.com.cmm.util.EgovUserDetailsHelper;
+import egovframework.com.uss.umt.service.EgovUserManageService;
 import egovframework.com.utl.sim.service.EgovFileScrty;
 
 @Controller
@@ -48,7 +51,9 @@ public class BibleMemberController {
 	@Resource(name="egovUsrCnfrmIdGnrService")
 	private EgovIdGnrService idgenService;
 	
-	
+	/** userManageService */
+	@Resource(name = "userManageService")
+	private EgovUserManageService userManageService;
 	
 	
 	@RequestMapping("/bible/bibleMember/forInsert.do")
@@ -106,4 +111,31 @@ public class BibleMemberController {
 		
 		return "redirect:/bible/main.do";
 	}
+	
+	
+	@RequestMapping(value = "/bible/bibleMember/bibleIdDplctCnfirmAjax.do")
+	public ModelAndView bibleIdDplctCnfirmAjax(
+			@RequestParam Map<String, Object> commandMap) throws Exception {
+
+    	ModelAndView modelAndView = new ModelAndView();
+    	modelAndView.setViewName("jsonView");
+
+		String checkId = (String) commandMap.get("checkId");
+		//checkId = new String(checkId.getBytes("ISO-8859-1"), "UTF-8");
+
+		int usedCnt = userManageService.checkIdDplct(checkId);
+		modelAndView.addObject("usedCnt", usedCnt);
+		modelAndView.addObject("checkId", checkId);
+
+		return modelAndView;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
