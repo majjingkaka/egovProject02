@@ -31,10 +31,11 @@
  	<security:http pattern="\A/WEB-INF/tiles/.*\Z" security="none" auto-config="true" use-expressions="true" />
  	<security:http pattern="\A/WEB-INF/jsp/.*\Z" request-matcher="regex" security="none" auto-config="true" use-expressions="true" />
 	
-	<security:http pattern="/bible/**" auto-config="true" use-expressions="true" /><!-- authentication-manager-ref="userJdbcUserManager" -->
+	<security:http pattern="/bible/**" auto-config="true" use-expressions="true"><!-- authentication-manager-ref="userJdbcUserManager" -->
 		<!-- <security:csrf disabled="true"/> -->
 		<!-- <security:intercept-url pattern="/bible/**" access="permitAll"/> -->
-	<!-- </security:http> -->
+	
+	</security:http>
 	
 	<!-- 
 	<security:http pattern="/bible/**" auto-config="true" use-expressions="true">authentication-manager-ref="userJdbcUserManager"
@@ -151,7 +152,7 @@
 		xframeOptions="SAMEORIGIN" 
 		xssProtection="true" 
 		cacheControl="false"
-		csrf="true"
+		csrf="false"
 		csrfAccessDeniedUrl="/egovCSRFAccessDenied.do"
 	/>
 

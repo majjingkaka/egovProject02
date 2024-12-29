@@ -15,6 +15,100 @@ function bibleMemberInsert(){
 	
 	var frm = document.frm;
 	
+	//var form = $("#frm")[0];
+	var v = new MiyaValidator(frm);
+	
+	v.add("userId", {
+        required: true,
+        message : "아이디를 입력하세요"
+    });
+	
+	v.add("password", {
+		required : true,
+		message : "비밀번호를 입력하세요"
+	});
+	
+	v.add("password", {
+		//pattern : "/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^*+=-]).{9,16}$/",
+		pattern : "(?=.*[0-9])(?=.*[a-zA-Z])(?=\\S+$)(?=.*[!@#$%^*+=-]).{5,16}$",
+		message : "5자~16자 이하 영문 대소문자, 숫자, 특수문자 조합으로 입력가능 합니다."
+	});
+	
+	v.add("passwordCheck", {
+		required : true,
+		message : "비밀번호 확인 입력 하십시오"
+	});
+	
+	v.add("passwordCheck", {
+		match : "password",
+		message : "비밀번호가 일치하지 않습니다."
+	});
+	
+	v.add("userNm", {
+        required: true,
+        message : "닉네임을 입력하세요"
+    });
+	
+	v.add("mberAge", {
+        required: true,
+        message : "나이를 입력하세요"
+    });
+	
+	v.add("dutyCd", {
+        required: true,
+        message : "직분을 선택하세요"
+    });
+	
+	v.add("email", {
+        required: true,
+        message : "이메일을 입력하세요"
+    });
+	
+	v.add("emailDomain", {
+        required: true,
+        message : "이메일 도메인을 입력하세요"
+    });
+	
+	v.add("middleTelno", {
+        required: true,
+        message : "전화번호 중간자리 입력하세요"
+    });
+	
+	v.add("endTelno", {
+        required: true,
+        message : "전화번호 끝자리 입력하세요"
+    });
+	
+	v.add("churchNm", {
+        required: true,
+        message : "교회이름을 입력하세요"
+    });
+	
+	v.add("zip", {
+        required: true,
+        message : "우편번호를 입력하세요"
+    });
+	
+	
+	v.add("adres", {
+        required: true,
+        message : "주소를 입력하세요"
+    });
+	
+	v.add("detailAdres", {
+        required: true,
+        message : "주소 상세를 입력하세요"
+    });
+	
+	var result = v.validate();
+	if (!result) {
+		alert(v.getErrorMessage());
+		v.getErrorElement().focus();
+		return;
+	}
+	
+	
+	
 	//var txt = oEditors.getById["bbCn"].getIR();
 	//oEditors.getById["bbCn"].exec("UPDATE_CONTENTS_FIELD", []);
 	
@@ -72,14 +166,14 @@ function addrSearch() {
             }
          	
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById('zonecode').value = data.zonecode;
-            document.getElementById("churchAddress").value = roadAddr;
+            document.getElementById('zip').value = data.zonecode;
+            document.getElementById("adres").value = roadAddr;
             //document.getElementById("churchAddress").value = data.jibunAddress;
-            document.getElementById("churchAddressInc").value = extraRoadAddr;
+            //document.getElementById("churchAddressInc").value = extraRoadAddr;
             
             console.log(data.zonecode);
             console.log(roadAddr);
-            console.log(extraRoadAddr);
+            //console.log(extraRoadAddr);
             
             
         }
@@ -92,9 +186,9 @@ function f_changeMail(val){
 
 	if(frm.emailMore.value != 'direct'){
 		//frm.userEmad2.disabled = true;
-		frm.emaildomain.value = val;
+		frm.emailDomain.value = val;
 	}else{
-		frm.emaildomain.value = "";
+		frm.emailDomain.value = "";
 		//frm.userEmad2.disabled = false;
 	}
 }
@@ -196,28 +290,28 @@ function f_changeMail(val){
        
        
        <div class="mb-3">
-         <label for="nickName" class="form-label" style="text-transform: none;">Nick Name & Age & Duty</label>
+         <label for="userNm" class="form-label" style="text-transform: none;">Nick Name & Age & Duty</label>
          
          
          
          <div class="row g-1 mb-1">
 	         <div class="col-sm-7">
-	         	<input type="text" id="nickName" name="nickName" value="" class="form-control" placeholder="hong gir dong" aria-describedby="defaultFormControlHelp"/>
+	         	<input type="text" id="userNm" name="userNm" value="" class="form-control" placeholder="hong gir dong" aria-describedby="defaultFormControlHelp"/>
 	         </div>
 	         
 	         <div class="col-sm-2">
-	         	<input type="text" id="age" name="age" value="" class="form-control" placeholder="Age" aria-describedby="defaultFormControlHelp" size="3" maxlength="3" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" />
+	         	<input type="text" id="mberAge" name="mberAge" value="" class="form-control" placeholder="Age" aria-describedby="defaultFormControlHelp" size="3" maxlength="3" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" />
 	         </div>
 	         
 	         <div class="col-sm-3">
-	         	<select name="job" id="job" class="form-select" aria-label="Default select example">
-	         		<option value="" <c:if test="${'direct' eq ''}">selected="selected"</c:if>>직분 선택</option>
-	         		<option value="청년" <c:if test="${'naver.com' eq ''}">selected="selected"</c:if>>청년</option>
-				  <option value="형제" <c:if test="${'direct' eq ''}">selected="selected"</c:if>>형제</option>
-                  <option value="자매" <c:if test="${'naver.com' eq ''}">selected="selected"</c:if>>자매</option>
-                  <option value="집사" <c:if test="${'gmail.com' eq ''}">selected="selected"</c:if>>집사</option>
-                  <option value="권사" <c:if test="${'hanmail.net' eq ''}">selected="selected"</c:if>>권사</option>
-                  <option value="목사" <c:if test="${'nate.com' eq ''}">selected="selected"</c:if>>목사</option>
+	         	<select name="dutyCd" id="dutyCd" class="form-select" aria-label="Default select example">
+	         	  <option value="" <c:if test="${empty result}">selected="selected"</c:if>>직분 선택</option>
+	         	  <option value="001" <c:if test="${result.dutyCd eq '001'}">selected="selected"</c:if>>청년</option>
+				  <option value="002" <c:if test="${result.dutyCd eq '002'}">selected="selected"</c:if>>형제</option>
+                  <option value="003" <c:if test="${result.dutyCd eq '003'}">selected="selected"</c:if>>자매</option>
+                  <option value="004" <c:if test="${result.dutyCd eq '004'}">selected="selected"</c:if>>집사</option>
+                  <option value="005" <c:if test="${result.dutyCd eq '005'}">selected="selected"</c:if>>권사</option>
+                  <option value="006" <c:if test="${result.dutyCd eq '006'}">selected="selected"</c:if>>목사</option>
 				</select>
 				
 	         </div>
@@ -255,7 +349,7 @@ function f_changeMail(val){
        
        
        <div class="mb-3">
-          <label class="form-label" for="email">Email</label>
+          <label class="form-label" for="email" style="text-transform: none;">Email</label>
           <div class="input-group">
             <!-- <span class="input-group-text"><i class="bx bx-envelope"></i></span> -->
             <!-- <input
@@ -271,7 +365,7 @@ function f_changeMail(val){
                         
             <input type="text" name="email" id="email" class="form-control" placeholder="email" aria-label="email">
 			  <span class="input-group-text">@</span>
-			  <input type="text" name="emaildomain" id="emaildomain" class="form-control" placeholder="emailDomain" aria-label="emaildomain">
+			  <input type="text" name="emailDomain" id="emailDomain" class="form-control" placeholder="emailDomain" aria-label="emailDomain">
 			  
 			  <select name="emailMore" id="emailMore" class="form-select" aria-label="Default select example" onchange="f_changeMail(this.value);">
 				  <option value="direct" <c:if test="${'direct' eq ''}">selected="selected"</c:if>>직접 입력</option>
@@ -332,7 +426,7 @@ function f_changeMail(val){
 
 
        <div class="mb-3">
-         <label for="phone" class="form-label" style="text-transform: none;">Phone</label>
+         <label for="areaNo" class="form-label" style="text-transform: none;">Phone</label>
          <!-- <input
            type="text" id="phone" name="phone" value=""
            class="form-control"
@@ -347,15 +441,15 @@ function f_changeMail(val){
          
          <div class="row g-1 mb-1">
 	         <div class="col-sm-4">
-	         	<input type="text" id="tel1" name="tel1" value="010" class="form-control" placeholder="010" aria-describedby="defaultFormControlHelp" size="3" maxlength="3" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" readonly="readonly"/>
+	         	<input type="text" id="areaNo" name="areaNo" value="010" class="form-control" placeholder="010" aria-describedby="defaultFormControlHelp" size="3" maxlength="3" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" readonly="readonly"/>
 	         </div>
 	         
 	         <div class="col-sm-4">
-	         	<input type="text" id="tel2" name="tel2" value="" class="form-control" placeholder="4자리" aria-describedby="defaultFormControlHelp" size="4" maxlength="4" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" />
+	         	<input type="text" id="middleTelno" name="middleTelno" value="" class="form-control" placeholder="4자리" aria-describedby="defaultFormControlHelp" size="4" maxlength="4" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" />
 	         </div>
 	         
 	         <div class="col-sm-4">
-	         	<input type="text" id="tel3" name="tel3" value="" class="form-control" placeholder="4자리" aria-describedby="defaultFormControlHelp" size="4" maxlength="4" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" />
+	         	<input type="text" id="endTelno" name="endTelno" value="" class="form-control" placeholder="4자리" aria-describedby="defaultFormControlHelp" size="4" maxlength="4" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" />
 	         </div>
          </div>
          
@@ -411,30 +505,30 @@ function f_changeMail(val){
 	         
 	         <div class="col-sm-9">
 	         	<input
-		           type="text" id="churchName" name="churchName" value=""
+		           type="text" id="churchNm" name="churchNm" value=""
 		           class="form-control"
-		           placeholder="churchName"
+		           placeholder="churchNm"
 		           aria-describedby="defaultFormControlHelp"
 		         />
 	         </div>
 	         <div class="col-sm-3">
-	         	<input type="text" id="zonecode" name="zonecode" value="" class="form-control" placeholder="zoneCode" aria-describedby="defaultFormControlHelp" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" />
+	         	<input type="text" id="zip" name="zip" value="" class="form-control" placeholder="zipCode" aria-describedby="defaultFormControlHelp" oninput="this.value=this.value.replace(/[^0-9.]/g,'').replace(/(\..*)\./g,'$1');" />
 	         </div>
          </div>
          
          <div class="row g-1 mb-1">
-	         <div class="col-sm-6">
-	         	<input type="text" id="churchAddress" name="churchAddress" value="" class="form-control" placeholder="address" aria-describedby="defaultFormControlHelp" />
+	         <div class="col-sm-12">
+	         	<input type="text" id="adres" name="adres" value="" class="form-control" placeholder="address" aria-describedby="defaultFormControlHelp" />
 	         </div>
 	         
-	         <div class="col-sm-6">
-	         	<input type="text" id="churchAddressInc" name="churchAddressInc" value="" class="form-control" placeholder="inc" aria-describedby="defaultFormControlHelp" />
-	         </div>
+	         <!-- <div class="col-sm-6">
+	         	<input type="text" id="addr3" name="addr3" value="" class="form-control" placeholder="inc" aria-describedby="defaultFormControlHelp" />
+	         </div> -->
          </div>
          
          <div class="row g-1">
 	         <div class="col-sm-12">
-	         	<input type="text" id="churchAddressDetail" name="churchAddressDetail" value="" class="form-control" placeholder="addressDetail" aria-describedby="defaultFormControlHelp" />
+	         	<input type="text" id="detailAdres" name="detailAdres" value="" class="form-control" placeholder="addressDetail" aria-describedby="defaultFormControlHelp" />
 	         </div>
          </div>
          

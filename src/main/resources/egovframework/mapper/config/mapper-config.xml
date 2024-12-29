@@ -19,6 +19,7 @@
 		
 		<typeAlias alias="bibleVo"			type="egovframework.com.bible.main.service.BibleVo" />
 		<typeAlias alias="sayRecordVo"		type="egovframework.com.bible.main.service.SayRecordVo" />
+		<typeAlias alias="bibleMemberVO"	type="egovframework.com.bible.main.service.BibleMemberVO" />
 		
 	</typeAliases>
     

@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+
 <%
  /**
   * @Class Name : EgovUnitTop.jsp
@@ -166,13 +168,48 @@
 	}
 	
 	function logout() {
-		console.log('logout...');
-		var form = document.logoutForm;
+		//location.href = "http://localhost:8080/bible/main.do";
+		//document.location.href = "http://localhost:8080/bible/main.do";
+		/* 
+		$.post("<c:url value='/bible/bibleLogin/logout2.do'/>",{},function(data, status) {
+		       //$("#text").html(data + "<br>" + status); // 전송받은 데이터와 전송 성공 여부를 보여줌.
+				//location.href = "<c:url value='/bible/main.do'/>";
+		    }
+		);
+		 */
+		
+		 $.ajax({
+			url : "${pageContext.request.contextPath}/bible/bibleLogin/logout.do",
+			type:'get', // 메소드(get, post, put 등)
+			data: {},
+			success: function(data){
+				console.log('ss');
+				//location.href = "<c:url value='/bible/main.do'/>";
+				setTimeout(function(){
+					location.reload(true);
+				}, 2000);
+			},
+			error:function(){  
+	            //에러가 났을 경우 실행시킬 코드
+				console.log('ee');
+				setTimeout(function(){
+					location.reload(true);
+				}, 2000);
+			}
+		});
+		
+		
+		//console.log('logout...');
+		//var form = document.logoutForm;
 		
 		//$("#sessionInfo").hide();
 		//parent.frames["content"].location.href = logoutUrl;
 		//document.getElementById('logoutForm').submit();
-		form.submit();
+		//form.submit();
+		
+		//setTimeout(function(){
+		//	location.reload(true);
+		//}, 2000);
 		
 		//location.href = "<c:url value='/bible/main.do'/>";
 	}

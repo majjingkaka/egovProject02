@@ -77,7 +77,7 @@
     <script src="/js/egovframework/com/cmm/jquery.js"></script>
     <script src="/js/egovframework/com/cmm/jqueryui.js"></script>
     <script src="/static/Bootstrap/js/bootstrap.bundle.min.js" ></script>
-    
+    <script src="/static/jslibrary/miya_validator.js"></script>
     
     
     

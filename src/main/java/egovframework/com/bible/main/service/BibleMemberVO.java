@@ -4,16 +4,128 @@ import java.io.Serializable;
 
 import egovframework.com.cmm.LoginVO;
 
-public class BibleMemberVO extends LoginVO implements Serializable{
+public class BibleMemberVO extends LoginVO{
 	
 	private String userId;
+	private String userNm;
 	private String password;
-	private String nickName;
-	private String churchName;
-	private String zipCode;
-	private String addr1;
-	private String addr2;
-	private String phone;
+	private String nickNm;
+	private String churchNm;
+	private String mberAge;
+	private String dutyCd;
+	private String mberSttus;
+	
+	private String zip;
+	private String adres;
+	private String detailAdres;
+	
+	private String mbtlnum;
+	private String areaNo;
+	private String middleTelno;
+	private String endTelno;
+	
+	private String email;
+	private String emailDomain;
+	
+	private String mberTyCode;
+	private String authorCode;
+	
+	
+	
+	
+	
+	
+	public String getDutyCd() {
+		return dutyCd;
+	}
+	public void setDutyCd(String dutyCd) {
+		this.dutyCd = dutyCd;
+	}
+	public String getMberSttus() {
+		return mberSttus;
+	}
+	public void setMberSttus(String mberSttus) {
+		this.mberSttus = mberSttus;
+	}
+	public String getAdres() {
+		return adres;
+	}
+	public void setAdres(String adres) {
+		this.adres = adres;
+	}
+	public String getDetailAdres() {
+		return detailAdres;
+	}
+	public void setDetailAdres(String detailAdres) {
+		this.detailAdres = detailAdres;
+	}
+	public String getMberAge() {
+		return mberAge;
+	}
+	public void setMberAge(String mberAge) {
+		this.mberAge = mberAge;
+	}
+	public String getMbtlnum() {
+		return mbtlnum;
+	}
+	public void setMbtlnum(String mbtlnum) {
+		this.mbtlnum = mbtlnum;
+	}
+	public String getAreaNo() {
+		return areaNo;
+	}
+	public void setAreaNo(String areaNo) {
+		this.areaNo = areaNo;
+	}
+	public String getMiddleTelno() {
+		return middleTelno;
+	}
+	public void setMiddleTelno(String middleTelno) {
+		this.middleTelno = middleTelno;
+	}
+	public String getEndTelno() {
+		return endTelno;
+	}
+	public void setEndTelno(String endTelno) {
+		this.endTelno = endTelno;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getEmailDomain() {
+		return emailDomain;
+	}
+	public void setEmailDomain(String emailDomain) {
+		this.emailDomain = emailDomain;
+	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	
+	public String getMberTyCode() {
+		return mberTyCode;
+	}
+	public void setMberTyCode(String mberTyCode) {
+		this.mberTyCode = mberTyCode;
+	}
+	public String getAuthorCode() {
+		return authorCode;
+	}
+	public void setAuthorCode(String authorCode) {
+		this.authorCode = authorCode;
+	}
+	public String getUserNm() {
+		return userNm;
+	}
+	public void setUserNm(String userNm) {
+		this.userNm = userNm;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -26,43 +138,20 @@ public class BibleMemberVO extends LoginVO implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getNickName() {
-		return nickName;
+	public String getNickNm() {
+		return nickNm;
 	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setNickNm(String nickNm) {
+		this.nickNm = nickNm;
 	}
-	public String getChurchName() {
-		return churchName;
+	public String getChurchNm() {
+		return churchNm;
 	}
-	public void setChurchName(String churchName) {
-		this.churchName = churchName;
-	}
-	public String getZipCode() {
-		return zipCode;
-	}
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-	public String getAddr1() {
-		return addr1;
-	}
-	public void setAddr1(String addr1) {
-		this.addr1 = addr1;
-	}
-	public String getAddr2() {
-		return addr2;
-	}
-	public void setAddr2(String addr2) {
-		this.addr2 = addr2;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setChurchNm(String churchNm) {
+		this.churchNm = churchNm;
 	}
 	
+
 	
 	
 }

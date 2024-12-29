@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.security.core.context.SecurityContext;
 
 import egovframework.com.bible.domain.MemberVO;
@@ -75,6 +76,7 @@ public class BibleLoginController {
 		return "redirect:/bible/main.do";
 	}
 	
+	
 	public void setAuthentication2(MemberVO vo, HttpServletRequest request) {
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
     	SimpleGrantedAuthority vnameAuthority = new SimpleGrantedAuthority("ROLE_ADMIN1");
@@ -114,7 +116,34 @@ public class BibleLoginController {
 		//return "redirect:/egovDevIndex.jsp";
 		return "redirect:/bible/main.do";
 		//return "index";
+		//return "bible/main/bibleMain";
 	}
 	
-	
+	@RequestMapping(value = "/bible/bibleLogin/logout2.do")
+	public void actionLogout2(
+			HttpServletRequest request
+			, HttpServletResponse response
+			, ModelMap model
+			) throws Exception {
+		log.debug("BibleLoginController actionLogout2 call...");
+		/*String userIp = EgovClntInfo.getClntIP(request);
+
+		// 1. Security 연동
+		return "redirect:/j_spring_security_logout";*/
+
+		request.getSession().setAttribute("loginVO", null);
+		// 세션모드인경우 Authority 초기화
+		// List<String> authList = (List<String>)EgovUserDetailsHelper.getAuthorities();
+		request.getSession().setAttribute("accessUser", null);
+		
+		if (request.getSession() != null) {
+			request.getSession().invalidate();
+		}
+		
+		SecurityContextHolder.clearContext();
+		
+		//return "redirect:/egovDevIndex.jsp";
+		//return "redirect:/bible/main.do";
+		//return "index";
+	}
 }
